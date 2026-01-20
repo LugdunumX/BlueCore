@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const KITS = {
     home: "/BlueCore/assets/Jersey-Valencygne-Esport-rouge.png",
-    away: "/BlueCore/assets/Jersey-Valencygne-Esport-blanc.png",
+    away: "/BlueCore/assets/blanc.png",
     gk: "/BlueCore/assets/Jersey-Valencygne-Esport-JAUNE.png"
   };
 
@@ -208,5 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderFormation(formationSelect.value);
 });
+
 
 
