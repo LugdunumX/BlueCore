@@ -1,0 +1,340 @@
+/* =========================
+   GLOBAL
+   ========================= */
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  background:radial-gradient(ellipse at top,#0b1020,#060a14);
+  color:white;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.mainHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 32px;
+  background:linear-gradient(180deg,#0b1020,#070b16);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.headerLeft{
+  display:flex;
+  align-items:center;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-size:18px;
+  color:white;
+}
+
+.logo img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+}
+
+.headerNav{
+  display:flex;
+  gap:26px;
+}
+
+.headerNav a{
+  color:#cbd5ff;
+  text-decoration:none;
+  font-weight:600;
+  opacity:.7;
+}
+
+.headerNav a:hover,
+.headerNav a.active{
+  opacity:1;
+  color:white;
+}
+
+.headerRight{
+  display:flex;
+  gap:12px;
+}
+
+.btn{
+  padding:8px 16px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:13px;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.btn.ghost{
+  border:1px solid rgba(255,255,255,.2);
+  color:white;
+}
+
+.btn.discord{
+  background:#5865F2;
+  color:white;
+}
+
+/* =========================
+   PAGE COMPOSITION
+   ========================= */
+
+.compositionPage{
+  padding:28px 32px 40px;
+}
+
+.compositionHeader{
+  margin-bottom:28px;
+}
+
+.compositionHeader h1{
+  font-size:32px;
+  font-weight:900;
+  margin:0;
+}
+
+.compositionHeader p{
+  margin-top:6px;
+  font-size:14px;
+  color:#aab0ff;
+}
+
+/* =========================
+   LAYOUT
+   ========================= */
+
+.compositionLayout{
+  display:flex;
+  gap:40px;
+  align-items:flex-start;
+}
+
+/* =========================
+   PANEL PARAMÈTRES
+   ========================= */
+
+.compositionPanel{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;
+  padding:18px 20px;
+  min-width:220px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.compositionPanel h3{
+  margin:0 0 12px;
+  font-size:16px;
+}
+
+.compositionPanel label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-top:10px;
+  margin-bottom:4px;
+}
+
+.compositionPanel select{
+  width:100%;
+  padding:6px 8px;
+  border-radius:8px;
+  border:none;
+  font-weight:600;
+}
+
+.panelHint{
+  margin-top:12px;
+  font-size:12px;
+  line-height:1.4;
+  opacity:.9;
+}
+
+/* =========================
+   TERRAIN
+   ========================= */
+
+.compositionPitch{
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+
+#pitch{
+  position:relative;
+  width:420px;
+  height:620px;
+  background:linear-gradient(#0f7a3b,#0b5f2e);
+  border-radius:16px;
+  border:2px solid rgba(255,255,255,.25);
+  box-shadow:0 30px 60px rgba(0,0,0,.6);
+  overflow:hidden;
+}
+
+/* contour */
+#pitch::before{
+  content:"";
+  position:absolute;
+  inset:20px;
+  border:2px solid rgba(255,255,255,.35);
+  border-radius:10px;
+  z-index:1;
+}
+
+/* cercle central */
+#pitch::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:140px;
+  height:140px;
+  border:2px solid rgba(255,255,255,.35);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  z-index:1;
+}
+
+/* ligne médiane */
+.midline{
+  position:absolute;
+  top:50%;
+  left:20px;
+  right:20px;
+  height:2px;
+  background:rgba(255,255,255,.35);
+  z-index:1;
+}
+
+/* surfaces */
+.penalty-box{
+  position:absolute;
+  left:50%;
+  width:220px;
+  height:120px;
+  border:2px solid rgba(255,255,255,.35);
+  transform:translateX(-50%);
+  z-index:1;
+}
+
+.penalty-box.top{
+  top:20px;
+  border-bottom:none;
+}
+
+.penalty-box.bottom{
+  bottom:20px;
+  border-top:none;
+}
+
+.penalty-spot{
+  position:absolute;
+  left:50%;
+  width:8px;
+  height:8px;
+  background:white;
+  border-radius:50%;
+  transform:translateX(-50%);
+  z-index:1;
+}
+
+.penalty-spot.top{ top:110px; }
+.penalty-spot.bottom{ bottom:110px; }
+
+/* =========================
+   JOUEURS
+   ========================= */
+
+.player{
+  position:absolute;
+  width:58px;
+  height:58px;
+  transform:translate(-50%,-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:5;
+}
+
+.player img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 6px 12px rgba(0,0,0,.6));
+  transition:transform .15s ease;
+}
+
+.player:hover img{
+  transform:scale(1.08);
+}
+
+.player-name{
+  position:absolute;
+  top:100%;
+  margin-top:4px;
+  font-size:11px;
+  font-weight:800;
+  color:white;
+  text-shadow:0 2px 4px rgba(0,0,0,.9);
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+/* =========================
+   CAPITAINE
+   ========================= */
+
+.player.captain img{
+  outline:3px solid gold;
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+.player.captain::after{
+  content:"C";
+  position:absolute;
+  top:-6px;
+  right:-6px;
+  width:20px;
+  height:20px;
+  background:gold;
+  color:black;
+  font-weight:900;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* =========================
+   ACTIONS
+   ========================= */
+
+.compositionActions{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:26px;
+}
+
+.compositionActions button{
+  padding:8px 14px;
+  border-radius:10px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+}
