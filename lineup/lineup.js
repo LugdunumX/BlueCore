@@ -5,7 +5,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const kitSelect = document.getElementById("kitSelect");
   const sendBtn = document.getElementById("sendCompoBtn");
 
-  const WEBHOOK_URL = "https://discord.com/api/webhooks/1462955175932198977/d0ibAL9el6NE0P9wxnZI7aCRiDSAcyuXKIcARj7OU2nzoOOy65_11DgUzgHGgA5ZH_M6"; // ⬅️ TON WEBHOOK
+  /* =========================
+   ENVOI COMPOSITION DISCORD
+   ========================= */
+
+const sendBtn = document.getElementById("sendCompoBtn");
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1462955175932198977/d0ibAL9el6NE0P9wxnZI7aCRiDSAcyuXKIcARj7OU2nzoOOy65_11DgUzgHGgA5ZH_M6"; // ← obligatoire
+
+if (sendBtn) {
+  sendBtn.addEventListener("click", () => {
+
+    const formation = formationSelect.value;
+    const players = document.querySelectorAll("#pitch .player");
+
+    let message = "🔥 **COMPOSITION DU CLUB** 🔥\n";
+    message += `📐 **Formation : ${formation}**\n\n`;
+
+    players.forEach(player => {
+      const role = player.dataset.role;
+      const label = player.querySelector(".player-name");
+      const name = label.childNodes[0].textContent.trim();
+      const captain = player.classList.contains("captain") ? " 🧢" : "";
+
+      message += `• **${role}** : ${name}${captain}\n`;
+    });
+
+    message += "\n🕘 Début : 21h00\n🎧 Vocal : 20h45";
+
+    fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: message })
+    })
+    .then(() => {
+      alert("✅ Composition envoyée sur Discord");
+    })
+    .catch(err => {
+      console.error(err);
+      alert("❌ Erreur lors de l’envoi");
+    });
+
+  });
+}
 
   const KITS = {
     home: "/BlueCore/assets/Jersey-Valencygne-Esport-rouge.png",
@@ -211,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderFormation(formationSelect.value);
 });
+
 
 
 
