@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const pitch = document.getElementById("pitch");
   const formationSelect = document.getElementById("formation");
   const kitSelect = document.getElementById("kitSelect");
+  const sendBtn = document.getElementById("sendCompoBtn");
+
+  const WEBHOOK_URL = "https://discord.com/api/webhooks/1462955175932198977/d0ibAL9el6NE0P9wxnZI7aCRiDSAcyuXKIcARj7OU2nzoOOy65_11DgUzgHGgA5ZH_M6"; // ⬅️ TON WEBHOOK
 
   const KITS = {
     home: "/BlueCore/assets/Jersey-Valencygne-Esport-rouge.png",
@@ -208,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderFormation(formationSelect.value);
 });
+
 
 
 
