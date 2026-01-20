@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>BlueCore — Composition</title>
+  <link rel="stylesheet" href="lineup.css">
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+     ========================= -->
+<header class="mainHeader">
+  <div class="headerLeft">
+    <div class="logo">
+      <img src="assets/valencygn.png" alt="BlueCore" />
+      <span>BlueCore</span>
+    </div>
+  </div>
+
+  <nav class="headerNav">
+    <a href="valencygn.html">Accueil</a>
+    <a href="lineup.html" class="active">Composition</a>
+    <a href="#">Fonctionnalités</a>
+    <a href="#">Commandes</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <div class="headerRight">
+    <a href="valencygn.html" class="btn ghost">Retour</a>
+    <a href="#" class="btn discord">Discord</a>
+  </div>
+</header>
+
+<!-- =========================
+     PAGE COMPOSITION
+     ========================= -->
+<main class="compositionPage">
+
+  <!-- TITRE -->
+  <div class="compositionHeader">
+    <h1>⚽ Composition du club</h1>
+    <p>Outil staff — configure ton XI, la tactique et les maillots</p>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="compositionLayout">
+
+    <!-- PANEL PARAMÈTRES -->
+    <aside class="compositionPanel">
+      <h3>⚙️ Paramètres</h3>
+
+      <label for="formation">Dispositif</label>
+<select id="formation">
+  <option>3-1-4-2</option>
+  <option>3-4-1-2</option>
+  <option>3-4-2-1</option>
+  <option>3-4-3</option>
+  <option>3-5-2</option>
+  <option>4-1-2-1-2</option>
+  <option>4-1-4-1</option>
+  <option>4-2-2-2</option>
+  <option>4-2-3-1</option>
+  <option>4-3-1-2</option>
+  <option>4-3-2-1</option>
+  <option>4-3-3</option>
+  <option value="4-3-3 (4)">4-3-3 (4)</option>
+  <option>4-4-1-1</option>
+  <option>4-4-2</option>
+  <option>4-5-1</option>
+  <option>5-2-1-2</option>
+  <option>5-3-2</option>
+  <option>5-4-1</option>
+</select>
+
+
+      <label for="kitSelect">Maillot</label>
+      <select id="kitSelect">
+        <option value="home">Domicile (Rouge)</option>
+        <option value="away">Extérieur (Blanc)</option>
+      </select>
+
+      <div class="panelHint">
+        🖱️ Clic gauche : renommer<br>
+        ⭐ Clic droit : capitaine
+      </div>
+    </aside>
+
+    <!-- TERRAIN -->
+    <section class="compositionPitch">
+      <div id="pitch">
+
+        <!-- MARQUAGES -->
+        <div class="midline"></div>
+        <div class="penalty-box top"></div>
+        <div class="penalty-box bottom"></div>
+        <div class="penalty-spot top"></div>
+        <div class="penalty-spot bottom"></div>
+
+        <!-- ⚠️ Les joueurs sont injectés ICI par lineup.js -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="compositionActions">
+  <button id="sendDiscord" class="btnPrimary">
+    📤 Envoyer la composition
+  </button>
+
+  <button id="saveComposition" class="btnGhost">
+    💾 Sauvegarder
+  </button>
+
+  <button id="loadComposition" class="btnDanger">
+    📂 Charger
+  </button>
+</div>
+
+</main>
+
+<!-- ⚠️ html2canvas AVANT lineup.js -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<!-- SCRIPT UNIQUE -->
+<script src="lineup.js"></script>
+
+</body>
+</html>
