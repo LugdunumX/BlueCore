@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const kitSelect = document.getElementById("kitSelect");
 
   const KITS = {
-    home: "/../assets/Jersey-Valencygne-Esport-rouge.png",
-    away: "/../assets/Jersey-Valencygne-Esport-blanc.png",
-    gk: "/../assets/Jersey-Valencygne-Esport-JAUNE.png"
+    home: "/BlueCore/assets/Jersey-Valencygne-Esport-rouge.png",
+    away: "/BlueCore/assets/Jersey-Valencygne-Esport-blanc.png",
+    gk: "/BlueCore/assets/Jersey-Valencygne-Esport-JAUNE.png"
   };
 
   /* =========================
@@ -208,4 +208,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderFormation(formationSelect.value);
 });
+
 
