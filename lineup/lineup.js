@@ -1,51 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const pitch = document.getElementById("pitch");
+  const sendBtn = document.getElementById("sendDiscord");
   const formationSelect = document.getElementById("formation");
-  const kitSelect = document.getElementById("kitSelect");
-  const sendBtn = document.getElementById("sendCompoBtn");
 
-  /* =========================
-   ENVOI COMPOSITION DISCORD
-   ========================= */
+  if (!sendBtn) {
+    console.error("❌ Bouton Discord introuvable");
+    return;
+  }
 
-const sendBtn = document.getElementById("sendCompoBtn");
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1462955175932198977/d0ibAL9el6NE0P9wxnZI7aCRiDSAcyuXKIcARj7OU2nzoOOy65_11DgUzgHGgA5ZH_M6"; // ← obligatoire
+  const DISCORD_WEBHOOK_URL =
+    "https://discord.com/api/webhooks/1462955175932198977/d0ibAL9el6NE0P9wxnZI7aCRiDSAcyuXKIcARj7OU2nzoOOy65_11DgUzgHGgA5ZH_M6";
 
-if (sendBtn) {
-  sendBtn.addEventListener("click", () => {
+  sendBtn.addEventListener("click", async () => {
+    try {
+      const pitch = document.getElementById("pitch");
 
-    const formation = formationSelect.value;
-    const players = document.querySelectorAll("#pitch .player");
+      // 📸 Capture terrain
+      const canvas = await html2canvas(pitch, {
+        backgroundColor: null,
+        scale: 2
+      });
 
-    let message = "🔥 **COMPOSITION DU CLUB** 🔥\n";
-    message += `📐 **Formation : ${formation}**\n\n`;
+      const blob = await new Promise(resolve =>
+        canvas.toBlob(resolve, "image/png")
+      );
 
-    players.forEach(player => {
-      const role = player.dataset.role;
-      const label = player.querySelector(".player-name");
-      const name = label.childNodes[0].textContent.trim();
-      const captain = player.classList.contains("captain") ? " 🧢" : "";
+      // 📝 Texte
+      const players = document.querySelectorAll(".player");
 
-      message += `• **${role}** : ${name}${captain}\n`;
-    });
+      let message = `⚽ **Composition du club**\n`;
+      message += `📋 **Formation : ${formationSelect.value}**\n\n`;
 
-    message += "\n🕘 Début : 21h00\n🎧 Vocal : 20h45";
+      players.forEach(p => {
+        const name = p.querySelector(".player-name")?.textContent || "Joueur";
+        const role = p.dataset.role || "?";
+        const captain = p.classList.contains("captain");
 
-    fetch(WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: message })
-    })
-    .then(() => {
-      alert("✅ Composition envoyée sur Discord");
-    })
-    .catch(err => {
+        message += `${captain ? "⭐ **CAPITAINE** — " : ""}${role} : ${name}\n`;
+      });
+
+      // 📦 Envoi Discord
+      const formData = new FormData();
+      formData.append("content", message);
+      formData.append("file", blob, "composition.png");
+
+      const res = await fetch(DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        body: formData
+      });
+
+      if (!res.ok) throw new Error("Webhook Discord KO");
+
+      alert("✅ Composition envoyée sur Discord !");
+    } catch (err) {
       console.error(err);
-      alert("❌ Erreur lors de l’envoi");
-    });
-
+      alert("❌ Erreur lors de l’envoi Discord");
+    }
   });
+
+});
 }
 
   const KITS = {
@@ -252,6 +265,7 @@ if (sendBtn) {
 
   renderFormation(formationSelect.value);
 });
+
 
 
 
